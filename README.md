@@ -12,7 +12,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-Before using the recommendation system, you need to download and process the CMU book summaries dataset. To do it, open a terminal prompt on the root directory and introduce the following command:
+Before using the recommendation system, you need to download and process the [CMU Book Summaries Dataset](https://www.cs.cmu.edu/~dbamman/booksummaries.html#:~:text=This%20dataset%20contains%20plot%20summaries,Creative%20Commons%20Attribution%2DShareAlike%20License.). To do it, open a terminal prompt on the root directory and introduce the following command:
 ```bash
 python data/utils.py
 ```
