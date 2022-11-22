@@ -142,7 +142,6 @@ class SpellChecker:
         :param word: string to get suggestions for
         :param n: desired number of suggestions
         :param k: amount of edited letters per suggestion
-        :param verbose:
         :return: list of tuples (word, probability) of the n most probable words
         """
         suggestions = self.vocab.intersection(self.edit_one_letter(word)) or self.vocab.intersection(self.edit_k_letters(word, k))
