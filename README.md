@@ -23,4 +23,11 @@ The data will take a few minutes to be ready. Once it's done, you can use the re
 python main/main.py
 ```
 
-## Models
+If you prefer using the user interface, introduce the following command from the root directory:
+```bash
+python main/gui.py
+```
+
+https://user-images.githubusercontent.com/73848748/203408690-0d100775-dd24-437f-b4f5-70ec3be237f9.mp4
+
+
