@@ -4,6 +4,7 @@ import pandas as pd
 import nltk
 import string
 import json
+import os
 import numpy as np
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -16,15 +17,17 @@ nltk.download('omw-1.4', quiet=True)
 nltk.download("stopwords", quiet=True)
 nltk.download("punkt", quiet=True)
 
+cur_file_path = os.path.dirname(os.path.realpath(__file__))
+
 
 def import_books_dataset():
     """
     Download and extract the CMU book summaries dataset
     """
     url = "http://www.cs.cmu.edu/~dbamman/data/booksummaries.tar.gz"
-    books_dataset_tar = wget.download(url)
+    books_dataset_tar = wget.download(url, out=cur_file_path)
     books_dataset = tarfile.open(books_dataset_tar)
-    books_dataset.extractall()
+    books_dataset.extractall(cur_file_path)
     books_dataset.close()
 
 
@@ -84,7 +87,7 @@ def process_books_dataset():
     col_names = ["wiki_id", "freebase_id", "title", "author", "date", "genre", "summary"]
 
     # Import dataset as dataframe
-    books_dataset = pd.read_csv("booksummaries/booksummaries.txt", names=col_names, sep="\t")
+    books_dataset = pd.read_csv(os.path.join(cur_file_path, "booksummaries/booksummaries.txt"), names=col_names, sep="\t")
 
     # Remove entries with summaries shorter than 10 words
     books_dataset["length"] = books_dataset["summary"].apply(lambda x: len(x.split()))
@@ -97,13 +100,12 @@ def process_books_dataset():
     print("Creating vocab")
     # Create embeddings dictionary (Keep only tokens present in pre-trained Glove vocabulary)
     vocab = create_embeddings_vocab(summaries, glove)
-    print(type(vocab))
-    json.dump(vocab, open("vocab.json", 'w'))
+    json.dump(vocab, open(os.path.join(cur_file_path, "vocab.json"), 'w'))
 
     books_dataset["summary_emb"] = books_dataset["summary"].apply(lambda x: get_document_embedding(x, vocab))
     books_dataset["title_lower"] = books_dataset["title"].apply(lambda x: x.lower())
     books_dataset["title_emb"] = books_dataset["title"].apply(lambda x: get_document_embedding(x, vocab))
-    books_dataset.to_pickle("books_dataset.pkl")
+    books_dataset.to_pickle(os.path.join(cur_file_path, "books_dataset.pkl"))
 
 
 def cosine_similarity(A, B):
@@ -122,4 +124,8 @@ def cosine_similarity(A, B):
 
 
 if __name__ == "__main__":
+    print("Importing CMU books summaries dataset")
+    import_books_dataset()
+    print()
+    print("Processing dataset")
     process_books_dataset()
