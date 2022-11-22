@@ -28,6 +28,6 @@ If you prefer using the user interface, introduce the following command from the
 python main/gui.py
 ```
 
-https://user-images.githubusercontent.com/73848748/203408690-0d100775-dd24-437f-b4f5-70ec3be237f9.mp4
+https://user-images.githubusercontent.com/73848748/203409957-b86e25e9-ce66-4621-b759-8861f2c9bed9.mp4
 
 
