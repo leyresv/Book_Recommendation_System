@@ -71,10 +71,12 @@ class BookRetriever:
         if (not title and not description) or (title and description):
             return("Please, introduce either title or description")
 
+        target_book = None
         # Look for books whose summary is similar to the summary of the introduced book
         if title:
             # Retrieve dataset entry for the desired title
             target_book = self.dataset.loc[self.dataset["title_lower"] == title.lower()]
+
             # If the title is not found,find the most similar title in the dataset
             if target_book.empty:
                 # Check if the introduced title is a part of a title in the dataset
