@@ -1,6 +1,6 @@
 # Book_Recommendation_System
 
-In this project, I have implemented a content-based book recommendation system.
+In this project, I have implemented a content-based book recommendation system. The user can introduce a title or a description of a book he likes, and the k number of recommendations he wants to get. The system will return the k books whose summaries are the most simmilar to the one of the book introduced by the user (using the cosine simmilarity of the summaries' embeddings).
 
 
 ## Installation
